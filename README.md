@@ -1,2 +1,3 @@
-# addition-toolbox
-A silly MATLAB toolbox project
+# Addition Toolbox
+
+A silly MATLAB toolbox project for experimentation.
