@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="78048256" file="/mathworks/devel/sandbox/rsouza/scratch/github/work/addition-toolbox/Addition Toolbox.prj" location="/mathworks/devel/sandbox/rsouza/scratch/github/work/addition-toolbox" name="Addition Toolbox" target="target.toolbox" target-name="Package Toolbox">
+  <configuration build-checksum="78048256" file="/mathworks/devel/sandbox/rsouza/scratch/github/addition-toolbox/Addition Toolbox.prj" location="/mathworks/devel/sandbox/rsouza/scratch/github/addition-toolbox" name="Addition Toolbox" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>Addition Toolbox</param.appname>
     <param.authnamewatermark>Randy Souza</param.authnamewatermark>
     <param.email>randy@randysouza.com</param.email>
@@ -20,25 +20,7 @@
     </param.products.version>
     <param.platforms />
     <param.guid>24333504-a167-4e83-96c8-7214975bcd02</param.guid>
-    <param.exclude.filters>% List files contained in your toolbox folder that you would like to exclude
-% from packaging.  Excludes should be listed relative to the toolbox folder.
-% Some examples of how to specify excludes are provided below:
-%
-% A single file in the toolbox folder:
-% .svn
-%
-% A single file in a subfolder of the toolbox folder:
-% example/.svn
-%
-% All files in a subfolder of the toolbox folder:
-% example/*
-%
-% All files of a certain name in all subfolders of the toolbox folder:
-% **/.svn
-%
-% All files matching a pattern in all subfolders of the toolbox folder:
-% **/*.bak
-%
+    <param.exclude.filters>.gitignore
 ._*.m
 resources</param.exclude.filters>
     <param.examples>&lt;?xml version="1.0" encoding="utf-8"?&gt;
@@ -58,13 +40,13 @@ resources</param.exclude.filters>
       <file>/mathworks/devel/sandbox/rsouza/scratch/github/work/addition-toolbox</file>
     </fileset.rootdir>
     <fileset.rootfiles>
-      <file>${PROJECT_ROOT}/add.m</file>
+      <file>/mathworks/devel/sandbox/rsouza/scratch/github/work/addition-toolbox/add.m</file>
     </fileset.rootfiles>
     <fileset.depfun.included />
     <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="/mathworks/devel/sandbox/rsouza/scratch/github/work/addition-toolbox" name="Addition Toolbox.mltbx" optional="false">/mathworks/devel/sandbox/rsouza/scratch/github/work/addition-toolbox/Addition Toolbox.mltbx</file>
+      <file location="/mathworks/devel/sandbox/rsouza/scratch/github/addition-toolbox" name="Addition Toolbox.mltbx" optional="false">/mathworks/devel/sandbox/rsouza/scratch/github/addition-toolbox/Addition Toolbox.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
