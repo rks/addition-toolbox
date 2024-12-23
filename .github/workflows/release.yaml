@@ -4,9 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       max-matlab-release:
-        required: true
+        description: Highest compatible MATLAB release (e.g., R2024b). Leave blank for "latest".
+        required: false
         type: string
       version-number:
+        description: Version number (major.minor.patch)
         required: true
         type: string
 
@@ -19,15 +21,36 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      # Use the Setup MATLAB GitHub Action to install MATLAB on a GitHub Actions runner.
+      #
+      # See: https://github.com/matlab-actions/setup-matlab/
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
           cache: true
-          release: R2024a
+          release: ${{ github.event.inputs.max-matlab-release }}
+
+      # Use the MATLAB build tool to create a toolbox (.mltbx) package. The package() task is
+      # defined in this repository's buildfile.m.
+      #
+      # See:
+      # - https://github.com/matlab-actions/run-build
+      # - https://www.mathworks.com/help/matlab/matlab_prog/overview-of-matlab-build-tool.html
+      # - ../../buildfile.m
       - name: Build package
         uses: matlab-actions/run-build@v2
         with:
           tasks: package(VersionNumber="${{ github.event.inputs.version-number }}", MaximumMatlabRelease="${{ github.event.inputs.max-matlab-release }}")
+
+      # We publish the release in two steps to work around a peculiarity in how GitHub releases are
+      # created. It we publish the release _and_ attach the .mltbx artifact in one step, GitHub
+      # may publish a "release created" webhook before the artifact is uploaded. If this happens,
+      # webhook consumers (such as File Exchange) may process the release without seeing the
+      # attached .mltbx.
+      #
+      # We work around this by initially making a draft release. Then, once the .mltbx artifact
+      # is uploaded, we publish the release.
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
@@ -42,5 +65,6 @@ jobs:
           updateOnlyUnreleased: true
           draft: false
           tag: v${{ github.event.inputs.version-number }}
+          body: Publish version ${{ github.event.inputs.version-number }}
 
 # cspell:words mltbx ncipollo
