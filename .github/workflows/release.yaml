@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       max-matlab-release:
-        required: false
+        required: true
         type: string
       version-number:
         required: true
@@ -27,7 +27,7 @@ jobs:
       - name: Build package
         uses: matlab-actions/run-build@v2
         with:
-          tasks: package
+          tasks: package(VersionNumber="${{ github.event.inputs.version-number }}", MaximumMatlabRelease="${{ github.event.inputs.max-matlab-release }}")
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
