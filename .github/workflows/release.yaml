@@ -1,4 +1,4 @@
-name: Release mltbx package
+name: Publish release
 
 on:
   workflow_dispatch:
@@ -11,8 +11,8 @@ on:
         type: string
 
 jobs:
-  create_mltbx:
-    name: Create mltbx package
+  publish_release:
+    name: Publish release
     runs-on: ubuntu-24.04
     permissions:
       contents: write
@@ -34,6 +34,13 @@ jobs:
           artifacts: "release/*.mltbx"
           draft: true
           commit: main
+          tag: v${{ github.event.inputs.version-number }}
+      - name: Publish release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          updateOnlyUnreleased: true
+          draft: false
           tag: v${{ github.event.inputs.version-number }}
 
 # cspell:words mltbx ncipollo
