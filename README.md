@@ -2,4 +2,4 @@
 
 A silly MATLAB toolbox project for experimentation.
 
-Test edit 3 in README.
+Test edit 4 in README.
